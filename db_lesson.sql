@@ -64,13 +64,21 @@ Q7.
   select name from people where age between 40 and 49 and gender=1 or age between 20 and 29 and gender=2;
 
 Q8.
-  select name from people where department_id=1 and age order by age desc;
+select
+  name
+from
+  people
+where
+  department_id = 1
+order by age desc;
 
 Q9.
   select AVG(age) AS average_age from people where gender=2 and department_id=2;
 
 Q10.
-  select name,department_id,content from people INNER JOIN reports ON people.person_id = reports.person_id;
+  select people.name,departments.name,content from people 
+  inner join reports on people.person_id = reports.person_id 
+  inner join departments on people.department_id = departments.department_id;
 
 Q11.
   select name from people where not exists (select * from reports where people.person_id = reports.person_id);
