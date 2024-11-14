@@ -1,11 +1,11 @@
 Q1.
   create table departments(
     department_id INT unsigned auto_increment PRIMARY KEY,
-    -> name VARCHAR(20),
+    -> name VARCHAR(20) not null,
     -> created_at TIMESTAMP default CURRENT_TIMESTAMP,
     -> updated_at TIMESTAMP default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     -> );
-
+ 
 Q2.
   ALTER TABLE people ADD department_id INT unsigned AFTER email;
 
@@ -55,23 +55,24 @@ Q4.
   update people SET department_id='1'WHERE person_id=6;
 
 Q5.
-  select * from people where gender=1 order by age desc;
+  select name,age from people where gender=1 order by age desc;
 
 Q6.
   peopleテーブルのdepartment_idが1に指定されている人のname、email、ageのカラムをレコードが作成された日時が古い順に取得することができる。
 
 Q7.
-  select name from people where age between 40 and 49 and gender=1;
-  select name from people where age between 20 and 29 and gender=2;
+  select name from people where age between 40 and 49 and gender=1 or age between 20 and 29 and gender=2;
 
 Q8.
   select name from people where department_id=1 and age order by age desc;
 
 Q9.
-  select AVG(age) AS average_age from people where gender=2 and department_id;
+  select AVG(age) AS average_age from people where gender=2 and department_id=2;
 
 Q10.
   select name,department_id,content from people INNER JOIN reports ON people.person_id = reports.person_id;
 
 Q11.
   select name from people where not exists (select * from reports where people.person_id = reports.person_id);
+
+  select name from people LEFT OUTER JOIN reports ON people.person_id = reports.person_id where reports.person_id IS null;
